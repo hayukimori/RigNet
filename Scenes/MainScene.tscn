@@ -14,15 +14,20 @@ grow_vertical = 2
 [node name="RigNetDecoder" type="Node" parent="." unique_id=1558648564]
 script = ExtResource("1_hpc76")
 
-[node name="Test" type="Node" parent="." unique_id=1115414926 node_paths=PackedStringArray("decoder", "vbox")]
+[node name="Test" type="Node" parent="." unique_id=1115414926 node_paths=PackedStringArray("page_container", "decoder")]
 script = ExtResource("2_tr2i4")
+page_container = NodePath("../ScrollContainer/HBoxContainer")
 decoder = NodePath("../RigNetDecoder")
-vbox = NodePath("../VBoxContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=349248332]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=460963510]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=1323153109]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

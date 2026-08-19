@@ -2,7 +2,6 @@ using Godot;
 using Google.Protobuf;
 using Rignet;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class RigNetDecoder : Node
@@ -22,18 +21,11 @@ public partial class RigNetDecoder : Node
             string httpUrl = url.Replace("rignet://", "https://");
             byte[] data = await _http.GetByteArrayAsync(httpUrl);
             var page = RigPage.Parser.ParseFrom(data);
-            var wrapper = new RigPageWrapper(page);
-            EmitSignal(SignalName.PageLoaded, wrapper);
+            EmitSignal(SignalName.PageLoaded, new RigPageWrapper(page));
         }
         catch (System.Exception e)
         {
             EmitSignal(SignalName.PageFailed, e.Message);
         }
-    }
-
-    public RigPageWrapper DecodeFromBytes(byte[] data)
-    {
-        var page = RigPage.Parser.ParseFrom(data);
-        return new RigPageWrapper(page);
     }
 }
