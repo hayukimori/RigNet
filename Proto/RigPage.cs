@@ -26,18 +26,21 @@ namespace Rignet {
           string.Concat(
             "ChBwcm90by9wYWdlLnByb3RvEgZyaWduZXQiUwoHUmlnTm9kZRIeCgR0eXBl",
             "GAEgASgOMhAucmlnbmV0Lk5vZGVUeXBlEgwKBHRleHQYAiABKAkSCwoDdXJs",
-            "GAMgASgJEg0KBWNvbG9yGAQgASgJIlsKB1JpZ1BhZ2USDQoFdGl0bGUYASAB",
-            "KAkSDgoGYXV0aG9yGAIgASgJEhEKCXRpbWVzdGFtcBgDIAEoBBIeCgVub2Rl",
-            "cxgEIAMoCzIPLnJpZ25ldC5SaWdOb2RlKp0BCghOb2RlVHlwZRIhCh1OT0RF",
-            "X1RZUEVfVU5LTk9XTl9VTlNQRUNJRklFRBAAEhUKEU5PREVfVFlQRV9IRUFE",
-            "SU5HEAESFwoTTk9ERV9UWVBFX1BBUkFHUkFQSBACEhMKD05PREVfVFlQRV9J",
-            "TUFHRRADEhIKDk5PREVfVFlQRV9MSU5LEAQSFQoRTk9ERV9UWVBFX0RJVklE",
-            "RVIQBWIGcHJvdG8z"));
+            "GAMgASgJEg0KBWNvbG9yGAQgASgJImIKClJpZ1NlY3Rpb24SJQoGbGF5b3V0",
+            "GAEgASgOMhUucmlnbmV0LlNlY3Rpb25MYXlvdXQSDQoFdGl0bGUYAiABKAkS",
+            "HgoFbm9kZXMYAyADKAsyDy5yaWduZXQuUmlnTm9kZSJhCgdSaWdQYWdlEg0K",
+            "BXRpdGxlGAEgASgJEg4KBmF1dGhvchgCIAEoCRIRCgl0aW1lc3RhbXAYAyAB",
+            "KAQSJAoIc2VjdGlvbnMYBCADKAsyEi5yaWduZXQuUmlnU2VjdGlvbipVCghO",
+            "b2RlVHlwZRILCgdVTktOT1dOEAASCwoHSEVBRElORxABEg0KCVBBUkFHUkFQ",
+            "SBACEgkKBUlNQUdFEAMSCAoETElOSxAEEgsKB0RJVklERVIQBSo5Cg1TZWN0",
+            "aW9uTGF5b3V0EggKBEZVTEwQABIICgRMRUZUEAESCQoFUklHSFQQAhIJCgVT",
+            "UExJVBADYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Rignet.NodeType), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Rignet.NodeType), typeof(global::Rignet.SectionLayout), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Rignet.RigNode), global::Rignet.RigNode.Parser, new[]{ "Type", "Text", "Url", "Color" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Rignet.RigPage), global::Rignet.RigPage.Parser, new[]{ "Title", "Author", "Timestamp", "Nodes" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rignet.RigSection), global::Rignet.RigSection.Parser, new[]{ "Layout", "Title", "Nodes" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Rignet.RigPage), global::Rignet.RigPage.Parser, new[]{ "Title", "Author", "Timestamp", "Sections" }, null, null, null, null)
           }));
     }
     #endregion
@@ -45,12 +48,19 @@ namespace Rignet {
   }
   #region Enums
   public enum NodeType {
-    [pbr::OriginalName("NODE_TYPE_UNKNOWN_UNSPECIFIED")] UnknownUnspecified = 0,
-    [pbr::OriginalName("NODE_TYPE_HEADING")] Heading = 1,
-    [pbr::OriginalName("NODE_TYPE_PARAGRAPH")] Paragraph = 2,
-    [pbr::OriginalName("NODE_TYPE_IMAGE")] Image = 3,
-    [pbr::OriginalName("NODE_TYPE_LINK")] Link = 4,
-    [pbr::OriginalName("NODE_TYPE_DIVIDER")] Divider = 5,
+    [pbr::OriginalName("UNKNOWN")] Unknown = 0,
+    [pbr::OriginalName("HEADING")] Heading = 1,
+    [pbr::OriginalName("PARAGRAPH")] Paragraph = 2,
+    [pbr::OriginalName("IMAGE")] Image = 3,
+    [pbr::OriginalName("LINK")] Link = 4,
+    [pbr::OriginalName("DIVIDER")] Divider = 5,
+  }
+
+  public enum SectionLayout {
+    [pbr::OriginalName("FULL")] Full = 0,
+    [pbr::OriginalName("LEFT")] Left = 1,
+    [pbr::OriginalName("RIGHT")] Right = 2,
+    [pbr::OriginalName("SPLIT")] Split = 3,
   }
 
   #endregion
@@ -106,7 +116,7 @@ namespace Rignet {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 1;
-    private global::Rignet.NodeType type_ = global::Rignet.NodeType.UnknownUnspecified;
+    private global::Rignet.NodeType type_ = global::Rignet.NodeType.Unknown;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Rignet.NodeType Type {
@@ -131,9 +141,6 @@ namespace Rignet {
     /// <summary>Field number for the "url" field.</summary>
     public const int UrlFieldNumber = 3;
     private string url_ = "";
-    /// <summary>
-    /// Link and Image
-    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Url {
@@ -146,9 +153,6 @@ namespace Rignet {
     /// <summary>Field number for the "color" field.</summary>
     public const int ColorFieldNumber = 4;
     private string color_ = "";
-    /// <summary>
-    /// optional
-    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Color {
@@ -184,7 +188,7 @@ namespace Rignet {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (Type != global::Rignet.NodeType.UnknownUnspecified) hash ^= Type.GetHashCode();
+      if (Type != global::Rignet.NodeType.Unknown) hash ^= Type.GetHashCode();
       if (Text.Length != 0) hash ^= Text.GetHashCode();
       if (Url.Length != 0) hash ^= Url.GetHashCode();
       if (Color.Length != 0) hash ^= Color.GetHashCode();
@@ -206,7 +210,7 @@ namespace Rignet {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Type != global::Rignet.NodeType.UnknownUnspecified) {
+      if (Type != global::Rignet.NodeType.Unknown) {
         output.WriteRawTag(8);
         output.WriteEnum((int) Type);
       }
@@ -232,7 +236,7 @@ namespace Rignet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Type != global::Rignet.NodeType.UnknownUnspecified) {
+      if (Type != global::Rignet.NodeType.Unknown) {
         output.WriteRawTag(8);
         output.WriteEnum((int) Type);
       }
@@ -258,7 +262,7 @@ namespace Rignet {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (Type != global::Rignet.NodeType.UnknownUnspecified) {
+      if (Type != global::Rignet.NodeType.Unknown) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
       }
       if (Text.Length != 0) {
@@ -282,7 +286,7 @@ namespace Rignet {
       if (other == null) {
         return;
       }
-      if (other.Type != global::Rignet.NodeType.UnknownUnspecified) {
+      if (other.Type != global::Rignet.NodeType.Unknown) {
         Type = other.Type;
       }
       if (other.Text.Length != 0) {
@@ -372,6 +376,267 @@ namespace Rignet {
   }
 
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class RigSection : pb::IMessage<RigSection>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<RigSection> _parser = new pb::MessageParser<RigSection>(() => new RigSection());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<RigSection> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Rignet.PageReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RigSection() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RigSection(RigSection other) : this() {
+      layout_ = other.layout_;
+      title_ = other.title_;
+      nodes_ = other.nodes_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public RigSection Clone() {
+      return new RigSection(this);
+    }
+
+    /// <summary>Field number for the "layout" field.</summary>
+    public const int LayoutFieldNumber = 1;
+    private global::Rignet.SectionLayout layout_ = global::Rignet.SectionLayout.Full;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Rignet.SectionLayout Layout {
+      get { return layout_; }
+      set {
+        layout_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "title" field.</summary>
+    public const int TitleFieldNumber = 2;
+    private string title_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string Title {
+      get { return title_; }
+      set {
+        title_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "nodes" field.</summary>
+    public const int NodesFieldNumber = 3;
+    private static readonly pb::FieldCodec<global::Rignet.RigNode> _repeated_nodes_codec
+        = pb::FieldCodec.ForMessage(26, global::Rignet.RigNode.Parser);
+    private readonly pbc::RepeatedField<global::Rignet.RigNode> nodes_ = new pbc::RepeatedField<global::Rignet.RigNode>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Rignet.RigNode> Nodes {
+      get { return nodes_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as RigSection);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(RigSection other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Layout != other.Layout) return false;
+      if (Title != other.Title) return false;
+      if(!nodes_.Equals(other.nodes_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Layout != global::Rignet.SectionLayout.Full) hash ^= Layout.GetHashCode();
+      if (Title.Length != 0) hash ^= Title.GetHashCode();
+      hash ^= nodes_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Layout != global::Rignet.SectionLayout.Full) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Layout);
+      }
+      if (Title.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Title);
+      }
+      nodes_.WriteTo(output, _repeated_nodes_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Layout != global::Rignet.SectionLayout.Full) {
+        output.WriteRawTag(8);
+        output.WriteEnum((int) Layout);
+      }
+      if (Title.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Title);
+      }
+      nodes_.WriteTo(ref output, _repeated_nodes_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Layout != global::Rignet.SectionLayout.Full) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Layout);
+      }
+      if (Title.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Title);
+      }
+      size += nodes_.CalculateSize(_repeated_nodes_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(RigSection other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Layout != global::Rignet.SectionLayout.Full) {
+        Layout = other.Layout;
+      }
+      if (other.Title.Length != 0) {
+        Title = other.Title;
+      }
+      nodes_.Add(other.nodes_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Layout = (global::Rignet.SectionLayout) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            Title = input.ReadString();
+            break;
+          }
+          case 26: {
+            nodes_.AddEntriesFrom(input, _repeated_nodes_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Layout = (global::Rignet.SectionLayout) input.ReadEnum();
+            break;
+          }
+          case 18: {
+            Title = input.ReadString();
+            break;
+          }
+          case 26: {
+            nodes_.AddEntriesFrom(ref input, _repeated_nodes_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
+  }
+
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class RigPage : pb::IMessage<RigPage>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
@@ -386,7 +651,7 @@ namespace Rignet {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Rignet.PageReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Rignet.PageReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -409,7 +674,7 @@ namespace Rignet {
       title_ = other.title_;
       author_ = other.author_;
       timestamp_ = other.timestamp_;
-      nodes_ = other.nodes_.Clone();
+      sections_ = other.sections_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -455,15 +720,15 @@ namespace Rignet {
       }
     }
 
-    /// <summary>Field number for the "nodes" field.</summary>
-    public const int NodesFieldNumber = 4;
-    private static readonly pb::FieldCodec<global::Rignet.RigNode> _repeated_nodes_codec
-        = pb::FieldCodec.ForMessage(34, global::Rignet.RigNode.Parser);
-    private readonly pbc::RepeatedField<global::Rignet.RigNode> nodes_ = new pbc::RepeatedField<global::Rignet.RigNode>();
+    /// <summary>Field number for the "sections" field.</summary>
+    public const int SectionsFieldNumber = 4;
+    private static readonly pb::FieldCodec<global::Rignet.RigSection> _repeated_sections_codec
+        = pb::FieldCodec.ForMessage(34, global::Rignet.RigSection.Parser);
+    private readonly pbc::RepeatedField<global::Rignet.RigSection> sections_ = new pbc::RepeatedField<global::Rignet.RigSection>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::Rignet.RigNode> Nodes {
-      get { return nodes_; }
+    public pbc::RepeatedField<global::Rignet.RigSection> Sections {
+      get { return sections_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -484,7 +749,7 @@ namespace Rignet {
       if (Title != other.Title) return false;
       if (Author != other.Author) return false;
       if (Timestamp != other.Timestamp) return false;
-      if(!nodes_.Equals(other.nodes_)) return false;
+      if(!sections_.Equals(other.sections_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -495,7 +760,7 @@ namespace Rignet {
       if (Title.Length != 0) hash ^= Title.GetHashCode();
       if (Author.Length != 0) hash ^= Author.GetHashCode();
       if (Timestamp != 0UL) hash ^= Timestamp.GetHashCode();
-      hash ^= nodes_.GetHashCode();
+      hash ^= sections_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -526,7 +791,7 @@ namespace Rignet {
         output.WriteRawTag(24);
         output.WriteUInt64(Timestamp);
       }
-      nodes_.WriteTo(output, _repeated_nodes_codec);
+      sections_.WriteTo(output, _repeated_sections_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -549,7 +814,7 @@ namespace Rignet {
         output.WriteRawTag(24);
         output.WriteUInt64(Timestamp);
       }
-      nodes_.WriteTo(ref output, _repeated_nodes_codec);
+      sections_.WriteTo(ref output, _repeated_sections_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -569,7 +834,7 @@ namespace Rignet {
       if (Timestamp != 0UL) {
         size += 1 + pb::CodedOutputStream.ComputeUInt64Size(Timestamp);
       }
-      size += nodes_.CalculateSize(_repeated_nodes_codec);
+      size += sections_.CalculateSize(_repeated_sections_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -591,7 +856,7 @@ namespace Rignet {
       if (other.Timestamp != 0UL) {
         Timestamp = other.Timestamp;
       }
-      nodes_.Add(other.nodes_);
+      sections_.Add(other.sections_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -624,7 +889,7 @@ namespace Rignet {
             break;
           }
           case 34: {
-            nodes_.AddEntriesFrom(input, _repeated_nodes_codec);
+            sections_.AddEntriesFrom(input, _repeated_sections_codec);
             break;
           }
         }
@@ -659,7 +924,7 @@ namespace Rignet {
             break;
           }
           case 34: {
-            nodes_.AddEntriesFrom(ref input, _repeated_nodes_codec);
+            sections_.AddEntriesFrom(ref input, _repeated_sections_codec);
             break;
           }
         }
